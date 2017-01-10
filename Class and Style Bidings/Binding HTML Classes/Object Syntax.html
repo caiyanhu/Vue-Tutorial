@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Object Syntax</title>
+  <script src="../../js/vue.js" charset="utf-8"></script>
+  <style>
+    .active {
+      background-color: green;
+      width: 100px;
+      height: 100px;
+    }
+
+    .text-danger {
+      border: 2px dotted red;
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='demo' v-bind:class="classObject"></div>
+  <script type="text/javascript">
+    var vm = new Vue(
+    {
+      el: '#demo',
+      data:
+      {
+        isActive: true,
+        error: null
+      },
+      computed:
+      {
+        classObject: function()
+        {
+          return {
+            active: this.isActive && !this.error,
+            'text-danger': this.error && this.error.type === 'fatal',
+          };
+        },
+      },
+    });
+  </script>
+</body>
+
+</html>

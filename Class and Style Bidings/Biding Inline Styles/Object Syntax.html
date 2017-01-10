@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>绑定样式</title>
+  <script src="../../js/vue.js" charset="utf-8"></script>
+  <style>
+    #demo1,
+    #demo2 {
+      height: 100px;
+      width: 100px;
+      border: 1px solid green;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- camelCase的fontSize会被转换成kebab-case的font-size -->
+  <div id="demo1" v-bind:style="{color:activeColor,fontSize:f+'px'}"></div>
+  <!-- 对象styleObject中的属性fontSize会被转换成kebab-case的font-size -->
+  <div id="demo2" v-bind:style="styleObject"></div>
+  <script type="text/javascript">
+    var vm1 = new Vue(
+    {
+      el: '#demo1',
+      data:
+      {
+        activeColor: 'red',
+        f: 30
+      },
+    });
+    var vm2 = new Vue(
+    {
+      el: '#demo2',
+      data:
+      {
+        styleObject:
+        {
+          color: 'red',
+          fontSize: '13px'
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
