@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Basic Example</title>
+  <script src="../../js/vue.js" charset="utf-8"></script>
+</head>
+<body>
+  <div id="demo">
+    <p>Original message: {{ message }}</p>
+    <p>Computed reversed message: {{ reversedMessage }}</p>
+  </div>
+  <script type="text/javascript">
+    var vm = new Vue({
+      el: '#demo',
+      data:
+      {
+        message: 'Hello',
+      },
+      computed:
+      {
+        // a computed getter
+        // computed properties are cached based on their dependencies.
+        //  A computed property will only re-evaluate when some of its dependencies have changed.
+        // This means as long as message has not changed, multiple access to the reversedMessage computed property will
+        // immediately return the previously computed result without having to run the function again.
+        reversedMessage:function()
+        {
+          // `this` points to the vm instance
+          return this.message.split('').reverse().join('');
+        }
+      },
+    });
+  </script>
+</body>
+</html>

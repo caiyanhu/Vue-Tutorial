@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Computed vs WatchedProperty</title>
+  <script src="../../js/vue.js" charset="utf-8"></script>
+</head>
+<body>
+  <h2>用watch property的方式拼出fullname</h2>
+  <div id="demo1">
+    {{ fullname1 }}
+  </div>
+  <hr>
+  <h2>用computed property的方式拼出fullname</h2>
+  <div id="demo2">
+    {{ fullname2 }}
+  </div>
+  <script type="text/javascript">
+    var vm1 = new Vue({
+      el: '#demo1',
+      data:
+      {
+        firstname: 'foo',
+        lastname: 'bar',
+        fullname1: 'foo bar',
+      },
+      watch:
+      {
+        // This code is imperative and repetitive
+        firstname: function(val)
+        {
+          this.fullname1 = val + ' ' + this.lastname;
+        },
+        lastname: function(val)
+        {
+          this.fullname1 = this.firstname + ' ' + val;
+        }
+      },
+    });
+    var vm2 = new Vue({
+      el: '#demo2',
+      data:
+      {
+        firstname: 'foo',
+        lastname: 'bar'
+      },
+      computed:
+      {
+        // 一行搞定
+        fullname2:function()
+        {
+          return this.firstname + ' ' + this.lastname;
+        }
+      },
+    });
+  </script>
+</body>
+</html>

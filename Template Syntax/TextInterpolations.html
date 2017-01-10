@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Text Interpolations</title>
+  <script src="../js/vue.js" charset="utf-8"></script>
+</head>
+<body>
+  <div id="demo">
+    <span>{{ msg }}</span>
+    <br>
+    <!-- 在浏览器控制台中修改msg_once的值，该区域不会变化，因为v-once表示只插值一次，不再更新数据 -->
+    <span v-once>{{ msg_once }}</span>
+  </div>
+  <script type="text/javascript">
+    var app = new Vue({
+      el: '#demo',
+      data:
+      {
+        msg: '可重复插值',
+        msg_once: '只插值一次'
+      },
+    });
+  </script>
+</body>
+</html>
