@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Object v-for</title>
+  <script src="../../js/vue.js" charset="utf-8"></script>
+</head>
+<body>
+  <ul id="repeat-object" class="demo">
+    <!-- 遍历对象中的各个属性 -->
+    <li v-for='(value, key, index) in object'>
+      {{ index }} {{ key }} {{ value }}
+    </li>
+  </ul>
+  <script type="text/javascript">
+    var vm = new Vue({
+      el: '#repeat-object',
+      data:
+      {
+        object:
+        {
+          firstname: 'Douglas',
+          lastname: 'Joes',
+          age: 28
+        },
+      },
+    });
+  </script>
+</body>
+</html>

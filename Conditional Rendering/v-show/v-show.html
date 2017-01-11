@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>v-show</title>
+  <script src="../../js/vue.js" charset="utf-8"></script>
+</head>
+<body>
+  <!-- v-show实质上就是切换元素的display样式，例如下面的OK为true时，h1的display:block,为false时，display:none -->
+  <!-- 但是这个元素是一直在的，只是看不到了 -->
+  <h1 id='demo' v-show='OK'>Hello!</h1>
+  <script type="text/javascript">
+    var vm = new Vue({
+      el: '#demo',
+      data:
+      {
+        OK: true,
+      },
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Array Mutation Methods</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <ul id="demo">
+      <li v-for="item in items">
+        {{ item }}
+      </li>
+    </ul>
+    <script type="text/javascript">
+      var vm = new Vue(
+      {
+        el: '#demo',
+        data:
+        {
+          items: ['1', '2']
+          // 然后在浏览器控制台实验push pop shift unshift slice sort reverse各个方法
+          // 这些方法是mutation methods，正如名字表示的那样，这些方法会修改原始数组
+        }
+      });
+    </script>
+  </body>
+
+</html>

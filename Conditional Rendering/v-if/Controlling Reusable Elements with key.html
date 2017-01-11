@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Controlling Reusable Elements with key</title>
+  <script src="../../js/vue.js" charset="utf-8"></script>
+</head>
+<body>
+  <div id="no-key-example">
+    <strong>with no key</strong>
+    <br>
+    <!-- 在input中输入一些字符，切换登录类型后，输入的字符出现在新的input里了。这不是想要的结果。 -->
+    <!-- 这是因为两个模板使用了相同的元素，切换登录类型并没有替换input元素 -->
+    <template v-if='loginType === "username"'>
+      <label>Username</label>
+      <input placeholder="Enter your username">
+    </template>
+    <template v-else>
+      <label>Email</label>
+      <input placeholder="Enter your email">
+    </template>
+    <br>
+    <button v-on:click='toogleLoginType'>Toogle Login Type</button>
+  </div>
+  <hr>
+  <div id="key-example">
+    <strong>with key</strong>
+    <br>
+    <!-- 和上面不同的是，此处的两个input加了key属性，两个key属性不同，表示这两个元素是完全独立的，渲染的时候不要re-use -->
+    <!-- 现在每点一次切换登录类型，input元素都会重新渲染，而不是重用 -->
+    <!-- 但是label元素还是会重用的，因为它没有key属性 -->
+    <template v-if='loginType === "username"'>
+      <label>Username</label>
+      <input placeholder="Enter your username" key='username-input'>
+    </template>
+    <template v-else>
+      <label>Email</label>
+      <input placeholder="Enter your email" key='email-input'>
+    </template>
+    <br>
+    <button v-on:click='toogleLoginType'>Toogle Login Type</button>
+  </div>
+  <script type="text/javascript">
+    var vm1 = new Vue({
+      el: '#no-key-example',
+      data:
+      {
+        loginType: 'username',
+      },
+      methods:
+      {
+        toogleLoginType:function()
+        {
+          return this.loginType = this.loginType === 'username' ? 'email' : 'username';
+        },
+      },
+    });
+    var vm2 = new Vue({
+      el: '#key-example',
+      data:
+      {
+        loginType: 'username',
+      },
+      methods:
+      {
+        toogleLoginType:function()
+        {
+          return this.loginType = this.loginType === 'username' ? 'email' : 'username';
+        },
+      },
+    });
+  </script>
+</body>
+</html>
