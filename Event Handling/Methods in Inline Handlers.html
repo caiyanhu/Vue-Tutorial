@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Methods in Inline Handlers</title>
+    <script src="../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <div id="demo">
+      <!-- 这次绑定的不是方法名，而是内联的JS语句（语句内调用方法） -->
+      <button v-on:click='say("hi")'>Say Hi</button>
+      <button v-on:click='say("what")'>Say What</button>
+      <!-- 通过内联语句出可以访问到原生DOM对象，如通过$event变量可以访问原生的DOM事件 -->
+      <button v-on:click='warn("Form cannot be submitted yet...",$event)'>Submit</button>
+    </div>
+    <script type="text/javascript">
+      var vm = new Vue(
+      {
+        el: '#demo',
+        methods:
+        {
+          say: function(msg)
+          {
+            alert(msg);
+          },
+          warn: function(msg, event)
+          {
+            if (event)
+            {
+              event.preventDefault();
+            }
+            alert(msg);
+          }
+        }
+      })
+    </script>
+  </body>
+
+</html>

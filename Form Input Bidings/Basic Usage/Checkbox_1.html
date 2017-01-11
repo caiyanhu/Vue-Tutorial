@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Checkbox</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <div id="demo">
+      <input type="checkbox" id='checkbox' v-model='checked'>
+      <!-- label的for属性指定本label与上面的input关联。上面的input本身是个checkbox，被勾选后自身的checked属性变为true -->
+      <!-- 变为true后，v-model将这一改变应用到vm的data下的checked变量，变量值发生变化后进而又反过来影响label的显示 -->
+      <label for="checkbox">{{ checked }}</label>
+    </div>
+    <script type="text/javascript">
+      var vm = new Vue(
+      {
+        el: '#demo',
+        data:
+        {
+          checked: false,
+        }
+      })
+    </script>
+  </body>
+
+</html>

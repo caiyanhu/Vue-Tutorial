@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Checkbox</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <div id="demo">
+      <!-- 多个checkbox，绑定到同一数组 -->
+      <input type="checkbox" id="jack" value="Jack" v-model='checkedNames'>
+      <label for="jack">Jack</label>
+      <input type="checkbox" id="john" value="John" v-model='checkedNames'>
+      <label for="john">John</label>
+      <input type="checkbox" id="mike" value="Mike" v-model='checkedNames'>
+      <label for="mike">Mike</label>
+      <br>
+      <span>Checked Names: {{ checkedNames }}</span>
+    </div>
+    <script type="text/javascript">
+      var vm = new Vue(
+      {
+        el: '#demo',
+        data:
+        {
+          checkedNames: [],
+        }
+      })
+    </script>
+  </body>
+
+</html>
