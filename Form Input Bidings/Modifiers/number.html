@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>number</title>
+  <script src="../../js/vue.js" charset="utf-8"></script>
+</head>
+
+<body>
+  <div id="demo">
+    <input type="number" v-model.number='age'>
+  </div>
+  <script type="text/javascript">
+    var vm = new Vue(
+    {
+      el: '#demo',
+      data:
+      {
+        // 即使把age定义成字符串，但只要在输入区域输入后，在控制台中看age的类型依然是number
+        age: 'hello'
+      }
+    })
+  </script>
+</body>
+
+</html>
