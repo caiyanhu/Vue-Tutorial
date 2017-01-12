@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>camelCase vs kebab-case</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <p>现假设这种情况，子组件通过props选项期望父组件传给它myMessage变量，那么父组件就要给子组件的属性加上myMessage。但是HTML的属性是不区分大小写的，所以需要将camelCase形式的myMessage转换成kebab-case的my-message</p>
+    <div id="demo">
+      <!-- kebab-case的my-message,而不是camelCase的myMessage。因为HTML不区分大小写，myMessage会被当做mymessage -->
+      <child my-message='hello'></child>
+    </div>
+    <script type="text/javascript">
+      Vue.component('child',
+      {
+        // camelCase的myMessage。
+        // 那能不能把js中的myMessage改成父组件传的my-message呢？不行，这样my-message会被当作两个变量my和message
+        // 为什么会被当作两个变量呢？因为js要求变量名中不能含有'-'连字符
+        props: ['myMessage'],
+        template: '<span>{{ myMessage }}</span>'
+      })
+      new Vue(
+      {
+        el: '#demo'
+      })
+    </script>
+  </body>
+
+</html>

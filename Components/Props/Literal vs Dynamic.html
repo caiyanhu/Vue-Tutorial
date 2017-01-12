@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Literal vs Dynamic</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <p>怎么验证msg的类型呢 ;-)</p>
+    <div id="demo1">
+      <!-- 传递的是字符串"1"，因此子组件child拿到的msg的类型也是string -->
+      <child msg='1'></child>
+    </div>
+    <hr>
+    <div id="demo2">
+      <!-- 通过v-bind，msg的会被javascript计算，做为数字传递给子组件。这样子组件拿到的msg类型为number -->
+      <child v-bind:msg='1'></child>
+    </div>
+    <script type="text/javascript">
+      var vm1 = new Vue(
+      {
+        el: '#demo1',
+        components:
+        {
+          child:
+          {
+            props: ['msg'],
+            template: '<span>{{ msg }}</span>'
+          }
+        }
+      })
+      new Vue(
+      {
+        el: '#demo2',
+        components:
+        {
+          child:
+          {
+            props: ['msg'],
+            template: '<span>{{ msg }}</span>'
+          }
+        }
+      })
+    </script>
+  </body>
+
+</html>

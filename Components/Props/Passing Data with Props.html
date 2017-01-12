@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Passing Data with Props</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <div id="demo">
+      <!-- 父组件传递message字符串给子组件child -->
+      <child message='fuck'></child>
+    </div>
+    <script type="text/javascript">
+      new Vue(
+      {
+        el: '#demo',
+        components:
+        {
+          child:
+          {
+            //表示自己期望从父组件那得到的数据名称，因此必须和父组件传递的数据名相同（本例中，必须是message）
+            props: ['message'],
+            template: '<span>{{ message }}</span>'
+          }
+        }
+      })
+    </script>
+  </body>
+
+</html>

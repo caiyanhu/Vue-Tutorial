@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Global Registration</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <div id="demo">
+      <my-component></my-component>
+    </div>
+    <script type="text/javascript">
+      // 必须先注册组件元素，后初始化根vue实例。否则会出现"Unknown custom element"错误
+      // my-component组件被注册在全局环境下
+      Vue.component('my-component',
+      {
+        template: '<div>A custom component.</div>'
+      })
+      var vm = new Vue(
+      {
+        el: '#demo'
+      })
+    </script>
+  </body>
+
+</html>

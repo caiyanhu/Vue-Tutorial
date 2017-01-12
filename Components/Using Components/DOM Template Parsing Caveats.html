@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM Template Parsing Caveats</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <table id='demo'>
+      <!-- Vue只能在浏览器解析和标准化HTML之后才能获得模板内容，在自定义组件中使用被限制的DOM元素时，这些自定义组件会被认为是无效的内容 -->
+      <!-- 下面的my-tr将不会得到渲染 -->
+      <my-tr></my-tr>
+      <!-- 使用is属性可以解决这个问题 -->
+      <tr is='my-tr'></tr>
+    </table>
+    <script type="text/javascript">
+      var vm = new Vue(
+      {
+        el: "#demo",
+        components:
+        {
+          'my-tr':
+          {
+            template: '<tr><td>1</td><td>2</td></tr>'
+          }
+        }
+      })
+    </script>
+  </body>
+
+</html>

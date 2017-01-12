@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>the "data" option must be a function</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <p>在自定义组件时，如果使用了data选项，那么data选项必须是个函数</p>
+    <div id="demo1">
+      <!-- 此组件不会被渲染，因为在定义它的时候，data选项是个对象而不是函数。 -->
+      <my-component></my-component>
+    </div>
+    <div id="demo2">
+      <!-- 此组件正常渲染 -->
+      <simple-counter></simple-counter>
+      <simple-counter></simple-counter>
+      <simple-counter></simple-counter>
+    </div>
+    <script type="text/javascript">
+      // 自定义组件my-component
+      Vue.component('my-component',
+      {
+        template: '<span>{{ message }}</span>',
+        // 因为data选项不是函数，所以Vue编译器会产生下面这条错误
+        // The "data" option should be a function that returns a per-instance value in component definitions.
+        data:
+        {
+          message: 'hello',
+        }
+      })
+      // 自定义组件simple-counter
+      Vue.component('simple-counter',
+      {
+        template: '<button v-on:click="counter+=1">{{counter}}</button>',
+        // 此处data选项是个函数，Vue编译器就不会有警告了
+        data: function()
+        {
+          // 每个组件绑定了一个自己专属的counter
+          return {
+            counter: 0
+          };
+        }
+      });
+      var vm1 = new Vue(
+      {
+        el: '#demo1',
+      });
+      var vm2 = new Vue(
+      {
+        el: '#demo2',
+      });
+    </script>
+  </body>
+
+</html>
