@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Using v-on with Custom Events</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <div id="demo">
+      <p>{{ total }}</p>
+      <!-- 父模板直接在子模板上通过v-on指令，监听子模板触发的increment事件 -->
+      <!-- 监听到之后，调用incrementTotal函数，把total的值加1 -->
+      <button-counter v-on:increment='incrementTotal'></button-counter>
+      <button-counter v-on:increment='incrementTotal'></button-counter>
+    </div>
+    <script type="text/javascript">
+      Vue.component('button-counter',
+      {
+        // 子模板绑定了click事件，在增加了自身的counter值后，触发“increment”事件
+        template: '<button v-on:click="increment">{{ counter }}</button>',
+        data: function()
+        {
+          return {
+            counter: 0
+          };
+        },
+        methods:
+        {
+          increment: function()
+          {
+            this.counter += 1;
+            this.$emit('increment');
+          }
+        },
+      })
+      new Vue(
+      {
+        el: '#demo',
+        data:
+        {
+          total: 0
+        },
+        methods:
+        {
+          incrementTotal: function()
+          {
+            this.total += 1;
+          }
+        }
+      })
+    </script>
+  </body>
+
+</html>
