@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>JavaScript Hooks</title>
+  <script src="../../js/vue.js" charset="utf-8"></script>
+</head>
+
+<body>
+  <div id="demo">
+    <button @click='show=!show'>Toggle Show</button>
+    <transition v-on:before-enter='beforeEnter' v-on:enter='enter' v-on:after-enter='afterEnter' v-on:enter-cancelled='enterCancelled'
+        v-on:before-leave='beforeLeave' v-on:leave='leave' v-on:after-leave='afterLeave' v-on:leave-cancelled='leaveCancelled'></transition>
+  </div>
+  <script type="text/javascript">
+    new Vue(
+    {
+      el: '#demo',
+      data:
+      {
+        show: true
+      },
+      methods:
+      {
+        // ------------
+        // ENTERING
+        // ------------
+        beforeEnter: function(el)
+        {
+          // ...
+        },
+        // the done callback is optional when used in combination with CSS
+        enter: function(el, done)
+        {
+          // ...
+          done()
+        },
+        afterEnter: function(el)
+        {
+          // ...
+        },
+        enterCancelled: function(el)
+        {
+          // ...
+        },
+        // ------------
+        // LEAVING
+        // ------------
+        beforeLeave: function(el)
+        {
+          // ...
+        },
+        // the done callback is optional when used in combination with CSS
+        leave: function(el, done)
+        {
+          // ...
+          done()
+        },
+        afterLeave: function(el)
+        {
+          // ...
+        },
+        // leaveCancelled only avaliable with v-show
+        leaveCancelled: function(el)
+        {
+          // ...
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
