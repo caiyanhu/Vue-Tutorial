@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Custom Trasition Classes</title>
+  <script src="../../js/vue.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="https://unpkg.com/animate.css@3.5.1/animate.min.css" type="text/css">
+</head>
+
+<body>
+  <div id="demo">
+    <button @click='show=!show'>Toggle Render</button>
+    <transition name='custom-classes-transition' enter-active-class='animated tada' leave-active-class='animated bounceOutRight'>
+      <p v-if='show'>hello</p>
+    </transition>
+  </div>
+  <script type="text/javascript">
+    new Vue(
+    {
+      el: "#demo",
+      data:
+      {
+        show: true
+      }
+    })
+  </script>
+</body>
+
+</html>
