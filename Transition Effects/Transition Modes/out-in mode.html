@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Transition Mode: out-in</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+    <style media="screen">
+      .with-mode-fade-enter-active,
+      .with-mode-fade-leave-active {
+        transition: opacity .5s;
+      }
+
+      .with-mode-fade-enter,
+      .with-mode-fade-leave-to {
+        opacity: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="with-mode-demo">
+      <transition name='with-mode-fade' mode='out-in'>
+        <button v-if='on' key='on' @click='on=false'>on</button>
+        <button v-else='' key='off' @click='on=true'>off</button>
+      </transition>
+    </div>
+    <script type="text/javascript">
+      new Vue(
+      {
+        el: '#with-mode-demo',
+        data:
+        {
+          on: false
+        }
+      })
+    </script>
+  </body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>No Mode Absolute</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+    <style>
+      .no-mode-absolute-demo-wrapper {
+        position: relative;
+        height: 18px;
+      }
+
+      .no-mode-absolute-demo-wrapper button {
+        position: absolute;
+      }
+
+      .no-mode-absolute-fade-enter-active,
+      .no-mode-absolute-fade-leave-active {
+        transition: opacity .5s
+      }
+
+      .no-mode-absolute-fade-enter,
+      .no-mode-absolute-fade-leave-to {
+        opacity: 0
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="demo">
+      <div class="no-mode-absolute-demo-wrapper">
+        <transition name='no-mode-absolute-fade'>
+          <button v-if='on' key='on' @click='on=false'>on</button>
+          <button v-else='' key='off' @click='on=true'>off</button>
+        </transition>
+      </div>
+    </div>
+    <script type="text/javascript">
+      new Vue(
+      {
+        el: '#demo',
+        data:
+        {
+          on: false
+        }
+      })
+    </script>
+  </body>
+
+</html>
