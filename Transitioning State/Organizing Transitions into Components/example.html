@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+    <script src="https://unpkg.com/tween.js@16.3.4" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <div id="demo">
+      <input type="number" v-model.number='firstNumber' step="20"> +
+      <input type="number" v-model.number='secondNumber' step="20"> = {{ result }}
+      <p>
+        <animated-integer :value='firstNumber'></animated-integer> +
+        <animated-integer :value='secondNumber'></animated-integer> =
+        <animated-integer :value='result'></animated-integer>
+      </p>
+    </div>
+    <script type="text/javascript">
+      // This complexity tweening logic now can be reused between any integers we may wish to animate in our application.
+      // components also offer a clean interface for configuring more dynamic transitions and complex transition strategie1s.
+      Vue.component('animated-integer',
+      {
+        template: '<span>{{ tweeningValue }}</span>',
+        props:
+        {
+          value:
+          {
+            type: Number,
+            required: true
+          }
+        },
+        data: function()
+        {
+          return {
+            tweeningValue: 0
+          };
+        },
+        watch:
+        {
+          value: function(newValue, oldValue)
+          {
+            this.tween(oldValue, newValue);
+          }
+        },
+        mounted: function()
+        {
+          this.tween(0, this.value);
+        },
+        methods:
+        {
+          tween: function(startValue, endValue)
+          {
+            var vm = this;
+
+            function animate(time)
+            {
+              requestAnimationFrame(animate);
+              TWEEN.update(time);
+            }
+            new TWEEN.Tween(
+            {
+              tweeningValue: startValue
+            }).to(
+            {
+              tweeningValue: endValue
+            }, 500).onUpdate(function()
+            {
+              vm.tweeningValue = this.tweeningValue.toFixed(0)
+            }).start();
+            animate();
+          }
+        }
+      })
+      // All complexity has now been removed from the main Vue instance
+      new Vue(
+      {
+        el: '#demo',
+        data:
+        {
+          firstNumber: 20,
+          secondNumber: 40
+        },
+        computed:
+        {
+          result: function()
+          {
+            return this.firstNumber + this.secondNumber;
+          }
+        }
+      })
+    </script>
+  </body>
+
+</html>
