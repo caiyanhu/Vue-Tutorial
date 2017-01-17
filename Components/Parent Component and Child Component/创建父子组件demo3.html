@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" contenvt="ie=edge">
+    <title>Parent Component and Child Component</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <div id="demo">
+      <!-- 4.  使用parent-component标签 -->
+      <parent-component></parent-component>
+    </div>
+    <script type="text/javascript">
+      // 基于demo2，将创建child组件构造器的语句放入template中
+      Vue.component('parent-component',
+      {
+        template: '<p>parent<child-component></child-component></p>',
+        components:
+        {
+          'child-component': Vue.extend(
+          {
+            template: '<p>child</p>'
+          })
+        }
+      })
+      new Vue(
+      {
+        el: '#demo'
+      })
+    </script>
+  </body>
+
+</html>

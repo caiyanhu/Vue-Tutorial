@@ -13,10 +13,11 @@
     <p>可以在父组件上通过v-bind，动态地将props和data绑定起来，当父组件中data变化了，因为子组件使用了props选项，该变化会直接反映到子组件里</p>
     <div id="demo">
       <!-- parentMsg变量的值等于输入的字符串 -->
+      <!-- 加入lazy修饰后，只有输入完回车后，输入的值才存储在parentMsg变量中 -->
       <input v-model.lazy='parentMsg'>
       <br>
       <!-- child的my-message属性等于parentMsg的值，父组件将my-message通过prop传给子组件child，子组件通过props拿到期望的myMessage变量并显示出来 -->
-      <child v-bind:my-message='parentMsg'></child>
+      <child :my-message='parentMsg'></child>
     </div>
     <script type="text/javascript">
       Vue.component('child',

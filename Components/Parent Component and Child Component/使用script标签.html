@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>使用script标签简化组件下template中HTML元素拼接</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <p>尽管语法糖简化了组件注册，但在template选项中拼接HTML元素比较麻烦，这也导致了HTML和JavaScript的高耦合性。
+      庆幸的是，Vue.js提供了两种方式将定义在JavaScript中的HTML模板分离出来。一种是使用scrip标签，一种是使用template标签。
+    </p>
+    <div id="app">
+      <my-component></my-component>
+    </div>
+    <!-- script标签的类型是x-template，里面的内容是要渲染的HTML -->
+    <script type='text/x-template' id='myComponent'>
+      <div>This is a component!</div>
+    </script>
+    <script type="text/javascript">
+      Vue.component('my-component',
+      {
+        // template的内容不再是HTML，而是一个id。通过id找到对应元素，再将对应元素下的HTML作为模板编译
+        template: '#myComponent'
+      })
+      new Vue(
+      {
+        el: '#app'
+      })
+    </script>
+  </body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" contenvt="ie=edge">
+    <title>Parent Component and Child Component</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <div id="demo">
+      <!-- 4.  使用parent-component标签 -->
+      <parent-component></parent-component>
+    </div>
+    <script type="text/javascript">
+      var child = Vue.extend(
+      {
+        template: '<p>child</p>'
+      })
+      // 基于demo1，使用了全局注册的语法糖
+      Vue.component('parent-component',
+      {
+        template: '<p>parent<child-component></child-component></p>',
+        components:
+        {
+          'child-component': child
+        }
+      })
+      new Vue(
+      {
+        el: '#demo'
+      })
+    </script>
+  </body>
+
+</html>

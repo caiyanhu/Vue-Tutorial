@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" contenvt="ie=edge">
+    <title>Parent Component and Child Component</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <div id="demo">
+      <!-- 4.  使用parent-component标签来渲染parent组件中的内容，同时child组件中的内容也被渲染出来了 -->
+      <parent-component></parent-component>
+    </div>
+    <script type="text/javascript">
+      // 定义组件构造器child
+      var child = Vue.extend(
+      {
+        template: '<p>this is child component.</p>'
+      });
+      // 定义组件构造器parent
+      var parent = Vue.extend(
+      {
+        // 2. 然后在模板中使用child-component,这样parent组件就成了child组件的父亲
+        // 子组件只能在父组件中使用
+        template: '<p>this is parent component.<br><child-component></child-component></p>',
+        // 1. 先在components选项中局部注册组件child，标签为child-component
+        components:
+        {
+          'child-component': child
+        }
+      });
+      // 3. 全局注册parent组件，标签为parent-component
+      Vue.component('parent-component', parent);
+      new Vue(
+      {
+        el: '#demo'
+      })
+    </script>
+  </body>
+
+</html>
