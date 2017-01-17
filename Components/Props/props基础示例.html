@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Props基础示例</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+    <style media="screen">
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box
+      }
+
+      html {
+        font-size: 12px;
+        font-family: Ubuntu, simHei, sans-serif;
+        font-weight: 400
+      }
+
+      body {
+        font-size: 1rem
+      }
+
+      table,
+      td,
+      th {
+        border-collapse: collapse;
+        border-spacing: 0
+      }
+
+      table {
+        width: 100%;
+        margin: 20px;
+      }
+
+      td,
+      th {
+        border: 1px solid #bcbcbc;
+        padding: 5px 10px
+      }
+
+      th {
+        background: #42b983;
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: #fff;
+        cursor: pointer
+      }
+
+      tr:nth-of-type(odd) {
+        background: #fff
+      }
+
+      tr:nth-of-type(even) {
+        background: #eee
+      }
+
+      fieldset {
+        border: 1px solid #BCBCBC;
+        padding: 15px;
+      }
+
+      input {
+        outline: none
+      }
+
+      input[type=text] {
+        border: 1px solid #ccc;
+        padding: .5rem .3rem;
+      }
+
+      input[type=text]:focus {
+        border-color: #42b983;
+      }
+
+      button {
+        outline: none;
+        padding: 5px 8px;
+        color: #fff;
+        border: 1px solid #BCBCBC;
+        border-radius: 3px;
+        background-color: #009A61;
+        cursor: pointer;
+      }
+
+      button:hover {
+        opacity: 0.8;
+      }
+
+      #app {
+        margin: 0 auto;
+        max-width: 480px;
+      }
+
+      #searchBar {
+        margin: 10px;
+        padding-left: 20px;
+      }
+
+      #searchBar input[type=text] {
+        width: 80%;
+      }
+
+      .arrow {
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        height: 0;
+        margin-left: 5px;
+        opacity: 0.66;
+      }
+
+      .arrow.asc {
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-bottom: 4px solid #fff;
+      }
+
+      .arrow.dsc {
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 4px solid #fff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="demo">
+      <!-- 父组件将自己data选项下name和age的值分别赋值给myName和myAge，然后将这两个变量绑定到子组件上 -->
+      <!-- 对应图示：http://images2015.cnblogs.com/blog/341820/201606/341820-20160629071659202-456031497.png -->
+      <!-- props中camelCase的myName转换成了kebab-case的my-name，原因是HTML不区分大小写 -->
+      <my-component :my-name='name' :my-age='age'></my-component>
+    </div>
+    <!-- 子组件的模板 -->
+    <template id="myComponent">
+      <table>
+        <tr>
+          <th colspan="2">子组件数据</th>
+        </tr>
+        <tr>
+          <td>my name: </td>
+          <td>{{ myName }}</td>
+        </tr>
+        <tr>
+          <td>my age: </td>
+          <td>{{ myAge }}</td>
+        </tr>
+      </table>
+    </template>
+    <script type="text/javascript">
+      var vm = new Vue(
+      {
+        el: '#demo',
+        data:
+        {
+          name: 'caiyanhu',
+          age: 28
+        },
+        components:
+        {
+          // 局部注册子组件，标签名my-component，希望从父组件(即vm这个实例)中接收myName和myAge两个数据
+          'my-component':
+          {
+            template: '#myComponent',
+            props: ['myName', 'myAge']
+          }
+        }
+      })
+    </script>
+  </body>
+
+</html>

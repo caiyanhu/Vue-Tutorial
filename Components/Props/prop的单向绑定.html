@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>prop的绑定类型之单向绑定</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+    <style media="screen">
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box
+      }
+
+      html {
+        font-size: 12px;
+        font-family: Ubuntu, simHei, sans-serif;
+        font-weight: 400
+      }
+
+      body {
+        font-size: 1rem
+      }
+
+      table,
+      td,
+      th {
+        border-collapse: collapse;
+        border-spacing: 0
+      }
+
+      table {
+        width: 100%;
+        margin: 20px;
+      }
+
+      td,
+      th {
+        border: 1px solid #bcbcbc;
+        padding: 5px 10px
+      }
+
+      th {
+        background: #42b983;
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: #fff;
+        cursor: pointer
+      }
+
+      tr:nth-of-type(odd) {
+        background: #fff
+      }
+
+      tr:nth-of-type(even) {
+        background: #eee
+      }
+
+      fieldset {
+        border: 1px solid #BCBCBC;
+        padding: 15px;
+      }
+
+      input {
+        outline: none
+      }
+
+      input[type=text] {
+        border: 1px solid #ccc;
+        padding: .5rem .3rem;
+      }
+
+      input[type=text]:focus {
+        border-color: #42b983;
+      }
+
+      button {
+        outline: none;
+        padding: 5px 8px;
+        color: #fff;
+        border: 1px solid #BCBCBC;
+        border-radius: 3px;
+        background-color: #009A61;
+        cursor: pointer;
+      }
+
+      button:hover {
+        opacity: 0.8;
+      }
+
+      #app {
+        margin: 0 auto;
+        max-width: 480px;
+      }
+
+      #searchBar {
+        margin: 10px;
+        padding-left: 20px;
+      }
+
+      #searchBar input[type=text] {
+        width: 80%;
+      }
+
+      .arrow {
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        height: 0;
+        margin-left: 5px;
+        opacity: 0.66;
+      }
+
+      .arrow.asc {
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-bottom: 4px solid #fff;
+      }
+
+      .arrow.dsc {
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 4px solid #fff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p>父组件中修改数据，因为绑定到了子组件中prop，所以子组件对应的数据也会发生变化。 但是prop默认是单向绑定，子组件发生了变化，父组件不会受影响。 在Vue 2.0以前，可以在绑定prop时加.sync修饰符来强制实现双向绑定。2.0以后不行。 在Vue 2.0以前，可以在绑定prop时加.once修饰符来实现单次绑定。2.0以后不行。
+    </p>
+    <div id="app">
+      <table>
+        <tr>
+          <th colspan="3">父组件数据</th>
+        </tr>
+        <tr>
+          <td>name</td>
+          <td>{{ name }}</td>
+          <td><input type="text" v-model='name'></td>
+        </tr>
+        <tr>
+          <td>age</td>
+          <td>{{ age }}</td>
+          <td><input type="text" v-model="age"></td>
+        </tr>
+      </table>
+      <!-- Vue2.0 以前可以这样实现双向绑定，即子组件修改会影响父组件data值 -->
+      <!-- <my-component :my-name.sync='name' :my-age.sync='age'></my-component> -->
+      <!-- Vue2.0 以前可以这样实现单次绑定，即绑定建立后，父组件值的变化不再传导给子组件 -->
+      <!-- <my-component :my-name.once='name' :my-age.once='age'></my-component> -->
+      <my-component :my-name='name' :my-age='age'></my-component>
+    </div>
+    <template id="myComponent">
+      <table>
+        <tr>
+          <th colspan="3">子组件数据</th>
+        </tr>
+        <tr>
+          <td>my name</td>
+          <td>{{ myName }}</td>
+          <td><input type="text" v-model='myName'></td>
+        </tr>
+        <tr>
+          <td>my age</td>
+          <td>{{ myAge }}</td>
+          <td><input type="text" v-model="myAge"></td>
+        </tr>
+      </table>
+    </template>
+    <script type="text/javascript">
+      var vm = new Vue(
+      {
+        el: '#app',
+        data:
+        {
+          name: 'caiyanhu',
+          age: 28
+        },
+        components:
+        {
+          'my-component':
+          {
+            template: '#myComponent',
+            props: ['myName', 'myAge']
+          }
+        }
+      })
+    </script>
+  </body>
+
+</html>
