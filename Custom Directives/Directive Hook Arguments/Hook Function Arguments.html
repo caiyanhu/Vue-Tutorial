@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Directive Hook Function Arguments</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>    
+  </head>
+
+  <body>
+    <div id="demo" v-demo:hello.a.b='message'></div>
+    <script type="text/javascript">
+      Vue.directive('demo',
+      {
+        // bind是自定义指令时一个Hook Function,当自定义指令首次绑定到元素时该函数被调用一次
+        // el是被绑定的元素，binding是有多个属性的对象，vnode是Vue编译器生成的虚拟结点
+        bind: function(el, binding, vnode)
+        {
+          var s = JSON.stringify
+          el.innerHTML = 'name:' + s(binding.name) + '<br>' + 'value:' + s(binding.value) + '<br>' + 'expression:' + s(binding.expression) +
+            '<br>' + 'argument:' + s(binding.argument) + '<br>' + 'modifiers:' + s(binding.modifiers) + '<br>' + 'vnode keys:' +
+            Object.keys(vnode).join(', ')
+        }
+      })
+      new Vue(
+      {
+        el: '#demo',
+        data:
+        {
+          message: 'hello!'
+        }
+      })
+    </script>
+  </body>
+
+</html>

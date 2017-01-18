@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Compilation Scope</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <my-component></my-component>
+    </div>
+    <template id="myComponent">
+    <div>
+      <h2>{{ msg }}</h2>
+      <button @click='showMsg'>Show Message</button>
+    </div>
+  </template>
+    <script>
+      new Vue(
+      {
+        el: '#app',
+        components:
+        {
+          'my-component':
+          {
+            template: '#myComponent',
+            data: function()
+            {
+              return {
+                msg: 'this is a component'
+              };
+            },
+            methods:
+            {
+              showMsg: function()
+              {
+                alert(this.msg);
+              }
+            }
+          }
+        }
+      })
+    </script>
+  </body>
+
+</html>

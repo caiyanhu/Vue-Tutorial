@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>$children</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+    <style media="screen">
+      #app {
+        max-width: 640px;
+        margin: 50px auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p>在父组件中，可以通过this.$children访问子组件，this.$children是一个数组，包含了所有子组件的实例</p>
+    <div id="app">
+      <parent></parent>
+    </div>
+    <template id="parentComp">
+      <!-- 如果下面不加这个div块的话，vue会报Component template should contain exactly one root element这个错误 -->
+      <!-- 因为Vue2.0要求，组件的模板下面只能放一个根级元素，不加div的话，vue只认识child1，child2和button元素就不能被渲染了 -->
+      <!-- Vue1.0则没有这个要求 -->
+      <div>
+        <child1></child1>
+        <child2></child2>
+        <button @click='showChildComponentData'>显示子组件的数据</button>
+      </div>
+    </template>
+    <template id="childComp1">
+      <h2>This is child component 1</h2>
+    </template>
+    <template id="childComp2">
+      <h2>This is child component 2</h2>
+    </template>
+    <script type="text/javascript">
+      Vue.component('parent',
+      {
+        template: '#parentComp',
+        components:
+        {
+          'child1':
+          {
+            template: '#childComp1',
+            data: function()
+            {
+              return {
+                msg: 'child 1 aaa'
+              };
+            }
+          },
+          child2:
+          {
+            template: '#childComp2',
+            data: function()
+            {
+              return {
+                msg: 'child 2 bbb'
+              };
+            }
+          }
+        },
+        methods:
+        {
+          showChildComponentData: function()
+          {
+            for (var i = 0; i < this.$children.length; i++)
+            {
+              // 'this'在parent组件中，表示的是父组件
+              alert(this.$children[i].msg);
+            }
+          }
+        }
+      })
+      new Vue(
+      {
+        el: '#app'
+      })
+    </script>
+  </body>
+
+</html>

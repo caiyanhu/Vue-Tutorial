@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>$children</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+    <style media="screen">
+      #app {
+        max-width: 640px;
+        margin: 50px auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p>组件个数较多时，我们难以记住各个组件的顺序和位置，通过序号访问子组件不是很方便。 在子组件上使用ref属性，可以给子组件指定一个索引ID。$refs是一个对象，包含了所有有ref属性的子组件。
+    </p>
+    <div id="app">
+      <parent></parent>
+    </div>
+    <template id="parentComp">
+      <!-- 如果下面不加这个div块的话，vue会报Component template should contain exactly one root element这个错误 -->
+      <!-- 因为Vue2.0要求，组件的模板下面只能放一个根级元素，不加div的话，vue只认识child1，child2和button元素就不能被渲染了 -->
+      <!-- Vue1.0则没有这个要求 -->
+      <div>
+        <child1 ref='cc1'></child1>
+        <child2 ref='cc2'></child2>
+        <button @click='showChildComponentData'>显示子组件的数据</button>
+      </div>
+    </template>
+    <template id="childComp1">
+      <h2>This is child component 1</h2>
+    </template>
+    <template id="childComp2">
+      <h2>This is child component 2</h2>
+    </template>
+    <script type="text/javascript">
+      Vue.component('parent',
+      {
+        template: '#parentComp',
+        components:
+        {
+          'child1':
+          {
+            template: '#childComp1',
+            data: function()
+            {
+              return {
+                msg: 'child 1 aaa'
+              };
+            }
+          },
+          child2:
+          {
+            template: '#childComp2',
+            data: function()
+            {
+              return {
+                msg: 'child 2 bbb'
+              };
+            }
+          }
+        },
+        methods:
+        {
+          showChildComponentData: function()
+          {
+            // 'this'在parent组件中，表示父组件
+            alert(this.$refs.cc1.msg);
+            alert(this.$refs.cc2.msg);
+          }
+        }
+      })
+      new Vue(
+      {
+        el: '#app'
+      })
+    </script>
+  </body>
+
+</html>

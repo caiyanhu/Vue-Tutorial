@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <p>If your directive needs multiple values, you can also pass in a JavaScript object literal. Remember, directives can take any valid JavaScript
+      expression.
+    </p>
+    <div id="demo" v-demo='{color:"white", text:"hello!"}'></div>
+    <script type="text/javascript">
+      Vue.directive('demo', function(el, binding)
+      {
+        console.log(binding.value.color);
+        console.log(binding.value.text);
+      })
+      new Vue(
+      {
+        el: '#demo'
+      })
+    </script>
+  </body>
+
+</html>

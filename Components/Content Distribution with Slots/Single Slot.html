@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Single Slot</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+    <style media="screen">
+      .content {
+        margin: 30px auto;
+        max-width: 480px;
+        border: 1px solid #F1D202;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <my-component>
+        <!-- 此为分发内容，会替换模板中的slot -->
+        <h1>Hello,Vue.js!</h1>
+      </my-component>
+      <my-component>
+
+      </my-component>
+    </div>
+    <template id="myComponent">
+      <div class="content">
+        <h2>This is a component!</h2>
+        <slot>
+          如果没有分发内容，则显示本内容
+        </slot>
+        <p>Say something...</p>
+      </div>
+    </template>
+    <script type="text/javascript">
+      Vue.component('my-component',
+      {
+        template: '#myComponent'
+      })
+      new Vue(
+      {
+        el: '#app'
+      })
+    </script>
+  </body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Named Slots</title>
+    <script src="../../js/vue.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <template id="myComponent">
+      <div>
+        <header>
+          <slot name='header'></slot>
+        </header>
+        <main>
+          <slot></slot>
+        </main>
+        <footer>
+          <slot name='footer'></slot>
+        </footer>
+      </div>
+    </template>
+    <div id="app">
+      <my-component>
+        <h1 slot='header'>此处内容被插入模板中的header标签</h1>
+        <p>这里没有slot属性，默认会替换模板中没有name属性的那个slot，即main标签</p>
+        <p slot='footer'>此处内容被插入模板的footer标签</p>
+      </my-component>
+    </div>
+    <script type="text/javascript">
+      Vue.component('my-component',
+      {
+        template: '#myComponent'
+      })
+      new Vue(
+      {
+        el: '#app'
+      })
+    </script>
+  </body>
+
+</html>
